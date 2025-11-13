@@ -1,0 +1,269 @@
+-- ======= INIT =======
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+
+-- ======= INTRO =======
+local INTRO_IMAGE_ASSET = "rbxassetid://13836185493"
+local INTRO_FADE_IN_TIME = 0.75
+local INTRO_SHOW_TIME = 1.6
+local INTRO_FADE_OUT_TIME = 0.75
+
+do
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "RayfieldIntro_Client"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.IgnoreGuiInset = true
+    ScreenGui.Parent = game.CoreGui
+
+    local Image = Instance.new("ImageLabel")
+    Image.AnchorPoint = Vector2.new(0.5,0.5)
+    Image.Position = UDim2.new(0.5,0,0.48,0)
+    Image.Size = UDim2.new(0,600,0,180)
+    Image.BackgroundTransparency = 1
+    Image.Image = INTRO_IMAGE_ASSET
+    Image.ImageTransparency = 1
+    Image.Parent = ScreenGui
+
+    task.spawn(function()
+        local steps = 25
+        for i = 1, steps do
+            local t = i/steps
+            Image.ImageTransparency = 1 - t
+            task.wait(INTRO_FADE_IN_TIME/steps)
+        end
+        task.wait(INTRO_SHOW_TIME)
+        for i = 1, steps do
+            local t = i/steps
+            Image.ImageTransparency = t
+            task.wait(INTRO_FADE_OUT_TIME/steps)
+        end
+        ScreenGui:Destroy()
+    end)
+end
+
+task.wait(INTRO_FADE_IN_TIME + INTRO_SHOW_TIME + INTRO_FADE_OUT_TIME + 0.05)
+
+-- ======= LOAD RAYFIELD =======
+local ok, Rayfield = pcall(function()
+    return loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+end)
+if not ok or not Rayfield then
+    warn("Không thể load Rayfield")
+    return
+end
+
+-- ======= CREATE WINDOW =======
+local Window = Rayfield:CreateWindow({
+    Name = "X.meo62 script menu",
+    LoadingTitle = "Đang khởi động GUI...",
+    LoadingSubtitle = "Vui lòng chờ",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "X.meo62",
+        FileName = "Config"
+    },
+    KeySystem = false
+})
+
+-- ======= TẠO 16 TAB CHUẨN =======
+
+-- Tab 1: Menu Chính
+local Tab1 = Window:CreateTab("Menu Chính", 4483362458)
+Tab1:CreateLabel("Các script chính")
+Tab1:CreateButton({
+    Name = "Tổng hợp Rayfiled",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/rammcodes/Dopefolio/858e52ae5ab0f1ece0e915d5c0b2df111a82f3f8/ScriptTongHop", true))()
+    end
+})
+
+-- Tab 2: cdvn💀
+local Tab2 = Window:CreateTab("cdvn💀", 4483362458)
+Tab2:CreateLabel("Các script CDVN đầy đủ")
+Tab2:CreateButton({
+    Name = "Script cdvn đầy đủ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/newbie0z-lol/preprt/refs/heads/main/preprt.lua"))()
+    end
+})
+Tab2:CreateButton({
+    Name = "Treo tiền",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ducanhhere/afk-fps-tool/main/script.lua"))()
+    end
+})
+
+-- Tab 3: gâu gâu garden🌳
+local Tab3 = Window:CreateTab("gâu gâu garden🌳", 4483362458)
+Tab3:CreateLabel("Các script Gâu Gâu Garden")
+Tab3:CreateButton({
+    Name = "Script S",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/BestScript-cmd/GAGScript/refs/heads/main/DarkSpawner"))()
+    end
+})
+
+-- Tab 4: Blox fruts 🔥
+local Tab4 = Window:CreateTab("Blox fruts 🔥", 4483362458)
+Tab4:CreateLabel("Các script Blox Fruits")
+Tab4:CreateButton({
+    Name = "Xeter",
+    Callback = function()
+        getgenv().Version = "V1"
+        getgenv().Team = "Marines"
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/TlDinhKhoi/Xeter/refs/heads/main/Main.lua"))()
+    end
+})
+
+-- Tab 5: 99 night 😰
+local Tab5 = Window:CreateTab("99 night 😰", 4483362458)
+Tab5:CreateLabel("Các script 99 Nights")
+Tab5:CreateButton({
+    Name = "Skibidi",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ProBaconHub/DATABASE/refs/heads/main/99%20Nights%20in%20the%20Forest/Infinite%20Health.lua"))()
+    end
+})
+Tab5:CreateButton({
+    Name = "VoirdWare",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/nightsintheforest.lua", true))()
+    end
+})
+
+-- Tab 6: steal a branrot 🧠
+local Tab6 = Window:CreateTab("steal a branrot 🧠", 4483362458)
+Tab6:CreateLabel("Các hub steal a branrot")
+Tab6:CreateButton({
+    Name = "Mirinda hub",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/vntai135/NSHUB/refs/heads/main/script"))()
+    end
+})
+Tab6:CreateButton({
+    Name = "Lemon hub",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ThunderModz/Desync/refs/heads/main/SabScriptV2", true))()
+    end
+})
+
+-- Tab 7: the strongest battlefields
+local Tab7 = Window:CreateTab("the strongest battlefields", 4483362458)
+Tab7:CreateLabel("Các script mạnh nhất")
+Tab7:CreateButton({
+    Name = "MinhNhatt",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/minhnhatdeplai8-cloud/MinhNhat-HUB-V3-/refs/heads/main/obfuscated_script-1757335118659.lua"))()
+    end
+})
+
+-- Tab 8: plant vs branrot 💥
+local Tab8 = Window:CreateTab("plant vs branrot 💥", 4483362458)
+Tab8:CreateLabel("Các script PvB")
+Tab8:CreateButton({
+    Name = "Speed Hub",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Keisha1602/SpeedHub/refs/heads/main/script"))()
+    end
+})
+Tab8:CreateButton({
+    Name = "Key Speed Hub vv",
+    Callback = function()
+        setclipboard("KfHLmNFnuaRmvbkQRwZGXDROXkxhdYAE")
+    end
+})
+Tab8:CreateButton({
+    Name = "No lag",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/NoLag-id/No-Lag-HUB/refs/heads/main/Loader/Main.lua"))()
+    end
+})
+
+-- Tab 9: blue lock🌀
+local Tab9 = Window:CreateTab("blue lock🌀", 4483362458)
+Tab9:CreateLabel("Các script Blue Lock")
+Tab9:CreateButton({
+    Name = "Control Ball",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/RedJDarks/MAIN/refs/heads/main/ControlRecreate"))()
+    end
+})
+
+-- Tab 10: fish🐟
+local Tab10 = Window:CreateTab("fish🐟", 4483362458)
+Tab10:CreateLabel("Các script Fish Hub")
+Tab10:CreateButton({
+    Name = "Speed Hub",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
+    end
+})
+Tab10:CreateButton({
+    Name = "Zenit",
+    Callback = function()
+        loadstring(game:HttpGet("https://zenithhub.cloud/panel/script"))()
+    end
+})
+
+-- Tab 11: fix lag
+local Tab11 = Window:CreateTab("fix lag", 4483362458)
+Tab11:CreateLabel("Fix lag game")
+Tab11:CreateButton({
+    Name = "Fix lag 100",
+    Callback = function()
+        for _, obj in ipairs(workspace:GetDescendants()) do
+            if obj:IsA("Part") or obj:IsA("MeshPart") then
+                obj.Material = Enum.Material.SmoothPlastic
+                obj.Color = Color3.fromRGB(255, 255, 255)
+            end
+        end
+        collectgarbage("collect")
+        if setfpscap then setfpscap(999) end
+    end
+})
+
+-- Tab 12: Lưu ý !
+local Tab12 = Window:CreateTab("Lưu ý !", 4483362458)
+Tab12:CreateLabel("Sẽ có vài script các bạn tự getkey, và lưu ý: không chơi server có người rank kick.")
+
+-- Tab 13: Thông tin
+local Tab13 = Window:CreateTab("Thông tin", 4483362458)
+Tab13:CreateLabel("Người sản xuất: X.meo62\nNgười hỗ trợ: 8hcari\nScript: chủ yếu lấy trên TikTok.")
+
+-- Tab 14: Troll
+local Tab14 = Window:CreateTab("Troll", 4483362458)
+Tab14:CreateLabel("Các script troll")
+Tab14:CreateButton({
+    Name = "Lọ vương",
+    Callback = function()
+        setclipboard('loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))("Spider Script")')
+    end
+})
+Tab14:CreateButton({
+    Name = "Jumpscare",
+    Callback = function()
+        setclipboard('loadstring(game:HttpGet("https//raw.githubusercontent.com/TheqopThe/robax/refs/heads/main/jumpscare.lua"))()')
+    end
+})
+
+-- Tab 15: Emote
+local Tab15 = Window:CreateTab("Emote", 4483362458)
+Tab15:CreateLabel("Emote All Game")
+Tab15:CreateButton({
+    Name = "Emote All Game",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/7yd7/Hub/refs/heads/Branch/GUIS/Emotes.lua"))()
+    end
+})
+
+-- Tab 16: Wall Hop
+local Tab16 = Window:CreateTab("Wall Hop", 4483362458)
+Tab16:CreateLabel("Các script Wall Hop")
+Tab16:CreateButton({
+    Name = "Auto Wall Hop",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ScpGuest666/Random-Roblox-script/refs/heads/main/Roblox%20WallHop%20V2%20script"))()
+    end
+})
